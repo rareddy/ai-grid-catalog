@@ -2,13 +2,18 @@ apiVersion: maas.opendatahub.io/v1alpha1
 kind: MaaSSubscription
 metadata:
   annotations:
-    ai-grid/version: "3"
+    ai-grid/version: "4"
     openshift.io/display-name: minimal
   name: minimal
   namespace: models-as-a-service
 spec:
   modelRefs:
   - name: opt-125m-new
+    namespace: models-as-a-service
+    tokenRateLimits:
+    - limit: 100
+      window: 1m
+  - name: smollm2-135m-instruct
     namespace: models-as-a-service
     tokenRateLimits:
     - limit: 100
@@ -34,6 +39,8 @@ metadata:
 spec:
   modelRefs:
   - name: opt-125m-new
+    namespace: models-as-a-service
+  - name: smollm2-135m-instruct
     namespace: models-as-a-service
   subjects:
     groups:
