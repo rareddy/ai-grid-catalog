@@ -1,0 +1,43 @@
+apiVersion: maas.opendatahub.io/v1alpha1
+kind: MaaSSubscription
+metadata:
+  annotations:
+    ai-grid/version: "1"
+    openshift.io/description: TA-02 test subscription for Grid Tenant 2
+    openshift.io/display-name: qe-ta02-min-b
+  name: qe-ta02-min-b
+  namespace: models-as-a-service
+spec:
+  modelRefs:
+  - name: opt-125m
+    namespace: models-as-a-service
+    tokenRateLimits:
+    - limit: 1000
+      window: 1m
+  organization:
+    id: e2b92493-fab8-4e2d-baef-f4ac7d6f7fbb
+  owner:
+    groups:
+    - name: e2b92493-fab8-4e2d-baef-f4ac7d6f7fbb/ai-grid-users
+    users: []
+  priority: 0
+---
+apiVersion: maas.opendatahub.io/v1alpha1
+kind: MaaSAuthPolicy
+metadata:
+  annotations:
+    openshift.io/description: TA-02 test subscription for Grid Tenant 2
+    openshift.io/display-name: qe-ta02-min-b
+  labels:
+    ai-grid/subscription: qe-ta02-min-b
+    app.kubernetes.io/managed-by: ai-grid-provider-backend
+  name: qe-ta02-min-b-policy
+  namespace: models-as-a-service
+spec:
+  modelRefs:
+  - name: opt-125m
+    namespace: models-as-a-service
+  subjects:
+    groups:
+    - name: e2b92493-fab8-4e2d-baef-f4ac7d6f7fbb/ai-grid-users
+    users: []
