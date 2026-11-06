@@ -19,6 +19,29 @@ apiVersion: maas.opendatahub.io/v1alpha1
 kind: MaaSModelRef
 metadata:
   annotations:
+    openshift.io/description: |-
+      Red Hat AI validated models have been tested and verified to work correctly across supported hardware and product configurations. These models are available as Hugging Face downloads, as OCI artifact images, and as modelcar container images. Platform-specific validated models are also available for IBM Spyre on IBM Power and IBM Z systems.
+
+      In addition to validated models, Red Hat ships enabled models as modelcar container images. Enabled models are architecturally supported but have not completed the full validation pipeline. For details about the difference between validated and enabled models, see Model support levels.
+
+      Note
+      If you are using AI Inference with Podman as part of a RHEL AI deployment, use ModelCar container images or Hugging Face models.
+
+      If you are using AI Inference as part of an Red Hat OpenShift AI deployment on OpenShift Container Platform, use OCI artifact images.
+
+      Red Hat uses GuideLLM for performance benchmarking and Language Model Evaluation Harness for accuracy evaluations.
+
+      For a complete list of models with platform compatibility data, see Model support matrix.
+
+      Important
+      AMD GPUs support only FP8 and GGUF quantization variant models. For more information, see Supported hardware.
+
+      Previous
+      Next
+      Format
+
+      Multi-page
+      Share Feedback
     openshift.io/display-name: SmolLM2-135M-Instruct
   labels:
     ai-grid/model: smollm2-135m-instruct
