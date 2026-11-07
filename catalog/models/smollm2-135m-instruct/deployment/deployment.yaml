@@ -3,7 +3,7 @@ kind: LLMInferenceService
 metadata:
   annotations:
     ai-grid/clusters: inf-spoke
-    ai-grid/version: "1"
+    ai-grid/version: "2"
     openshift.io/display-name: SmolLM2-135M-Instruct
   labels:
     ai-grid/model: smollm2-135m-instruct
@@ -33,8 +33,8 @@ spec:
       name: main
       resources:
         requests:
-          cpu: "4"
-          memory: 8Gi
+          cpu: "2"
+          memory: 4Gi
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
