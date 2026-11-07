@@ -3,7 +3,7 @@ kind: LLMInferenceService
 metadata:
   annotations:
     ai-grid/clusters: inf-spoke
-    ai-grid/version: "3"
+    ai-grid/version: "4"
     openshift.io/description: |-
       Red Hat AI validated models have been tested and verified to work correctly across supported hardware and product configurations. These models are available as Hugging Face downloads, as OCI artifact images, and as modelcar container images. Platform-specific validated models are also available for IBM Spyre on IBM Power and IBM Z systems.
 
@@ -27,7 +27,7 @@ metadata:
 
       Multi-page
       Share Feedback
-    openshift.io/display-name: SmolLM2-135M-Instruct
+    openshift.io/display-name: SmolLM2-135M-Instruct-new
   labels:
     ai-grid/model: smollm2-135m-instruct
     app.kubernetes.io/managed-by: ai-grid-provider-backend
