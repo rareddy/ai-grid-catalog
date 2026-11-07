@@ -1,0 +1,42 @@
+apiVersion: maas.opendatahub.io/v1alpha1
+kind: MaaSSubscription
+metadata:
+  annotations:
+    ai-grid/version: "1"
+    maas.opendatahub.io/retain-api-keys-on-delete: "true"
+    openshift.io/display-name: grid2-only
+  name: grid2-only
+  namespace: models-as-a-service
+spec:
+  modelRefs:
+  - name: smollm2-135m-instruct
+    namespace: models-as-a-service
+    tokenRateLimits:
+    - limit: 300
+      window: 1m
+  organization:
+    id: 53d4f57e-3588-55e8-b96c-4ec54a7c42fa
+  owner:
+    groups:
+    - name: 53d4f57e-3588-55e8-b96c-4ec54a7c42fa/ai-grid-users
+    users: []
+  priority: 1
+---
+apiVersion: maas.opendatahub.io/v1alpha1
+kind: MaaSAuthPolicy
+metadata:
+  annotations:
+    openshift.io/display-name: grid2-only
+  labels:
+    ai-grid/subscription: grid2-only
+    app.kubernetes.io/managed-by: ai-grid-provider-backend
+  name: grid2-only-policy
+  namespace: models-as-a-service
+spec:
+  modelRefs:
+  - name: smollm2-135m-instruct
+    namespace: models-as-a-service
+  subjects:
+    groups:
+    - name: 53d4f57e-3588-55e8-b96c-4ec54a7c42fa/ai-grid-users
+    users: []
