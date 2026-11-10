@@ -1,0 +1,53 @@
+apiVersion: serving.kserve.io/v1alpha2
+kind: LLMInferenceService
+metadata:
+  annotations:
+    ag-owner: ag-model:c0bfe88e39e64f10b219279ba8e1995c
+    ai-grid/clusters: inf-spoke
+    ai-grid/version: "1"
+  labels:
+    ai-grid/model: acme-smollm2
+    app.kubernetes.io/managed-by: ai-grid-provider-backend
+  name: acme-smollm2
+  namespace: ai-grid-internal-models
+spec:
+  model:
+    name: acme-smollm2
+    uri: hf://HuggingFaceTB/SmolLM2-135M-Instruct
+  replicas: 1
+  router:
+    gateway:
+      refs:
+      - name: openshift-ai-inference
+        namespace: openshift-ingress
+    route: {}
+    scheduler: {}
+  template:
+    containers:
+    - image: registry.redhat.io/rhaii/vllm-cpu-rhel9@sha256:0ec0f5ff9a5ff263f58db0cfb19e3d7eef24b94c2d8629fe5145f5a8747e28c9
+      name: main
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  labels:
+    ai-grid/model: acme-smollm2
+    app.kubernetes.io/managed-by: ai-grid-provider-backend
+  name: acme-smollm2-grid
+  namespace: ai-grid-internal-models
+spec:
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: redhat-ai-grid
+    ports:
+    - port: 8000
+      protocol: TCP
+    - port: 9090
+      protocol: TCP
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: acme-smollm2
+  policyTypes:
+  - Ingress
