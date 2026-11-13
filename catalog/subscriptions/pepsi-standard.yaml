@@ -1,0 +1,44 @@
+apiVersion: maas.opendatahub.io/v1alpha1
+kind: MaaSSubscription
+metadata:
+  annotations:
+    ai-grid/version: "1"
+    maas.opendatahub.io/retain-api-keys-on-delete: "true"
+    openshift.io/display-name: pepsi-standard
+  name: pepsi-standard
+  namespace: models-as-a-service
+spec:
+  modelRefs:
+  - name: smollm2-135m-instruct
+    namespace: models-as-a-service
+    tokenRateLimits:
+    - limit: 1000
+      window: 1m
+  organization:
+    id: a9a547c4-06b5-4860-bf50-88e03beca865
+  owner:
+    groups:
+    - name: a9a547c4-06b5-4860-bf50-88e03beca865/admins
+    - name: a9a547c4-06b5-4860-bf50-88e03beca865/users
+    users: []
+  priority: 2
+---
+apiVersion: maas.opendatahub.io/v1alpha1
+kind: MaaSAuthPolicy
+metadata:
+  annotations:
+    openshift.io/display-name: pepsi-standard
+  labels:
+    ai-grid/subscription: pepsi-standard
+    app.kubernetes.io/managed-by: ai-grid-provider-backend
+  name: pepsi-standard-policy
+  namespace: models-as-a-service
+spec:
+  modelRefs:
+  - name: smollm2-135m-instruct
+    namespace: models-as-a-service
+  subjects:
+    groups:
+    - name: a9a547c4-06b5-4860-bf50-88e03beca865/admins
+    - name: a9a547c4-06b5-4860-bf50-88e03beca865/users
+    users: []
