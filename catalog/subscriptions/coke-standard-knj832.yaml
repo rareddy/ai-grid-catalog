@@ -1,0 +1,44 @@
+apiVersion: maas.opendatahub.io/v1alpha1
+kind: MaaSSubscription
+metadata:
+  annotations:
+    ai-grid/version: "1"
+    maas.opendatahub.io/retain-api-keys-on-delete: "true"
+    openshift.io/display-name: coke-standard
+  name: coke-standard-knj832
+  namespace: models-as-a-service
+spec:
+  modelRefs:
+  - name: smolm2
+    namespace: models-as-a-service
+    tokenRateLimits:
+    - limit: 100
+      window: 1m
+    - limit: 1000
+      window: 1h
+  organization:
+    id: ba1e3bca-26d2-4558-89c9-0475c6e31ae6
+  owner:
+    groups:
+    - name: ba1e3bca-26d2-4558-89c9-0475c6e31ae6/users
+    users: []
+  priority: 3
+---
+apiVersion: maas.opendatahub.io/v1alpha1
+kind: MaaSAuthPolicy
+metadata:
+  annotations:
+    openshift.io/display-name: coke-standard
+  labels:
+    ai-grid/subscription: coke-standard-knj832
+    app.kubernetes.io/managed-by: ai-grid-provider-backend
+  name: coke-standard-knj832-policy
+  namespace: models-as-a-service
+spec:
+  modelRefs:
+  - name: smolm2
+    namespace: models-as-a-service
+  subjects:
+    groups:
+    - name: ba1e3bca-26d2-4558-89c9-0475c6e31ae6/users
+    users: []
