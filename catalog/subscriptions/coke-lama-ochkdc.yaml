@@ -1,0 +1,42 @@
+apiVersion: maas.opendatahub.io/v1alpha1
+kind: MaaSSubscription
+metadata:
+  annotations:
+    ai-grid/version: "1"
+    maas.opendatahub.io/retain-api-keys-on-delete: "true"
+    openshift.io/display-name: coke-lama
+  name: coke-lama-ochkdc
+  namespace: models-as-a-service
+spec:
+  modelRefs:
+  - name: llama-32-1b-instruct
+    namespace: models-as-a-service
+    tokenRateLimits:
+    - limit: 1000
+      window: 1m
+  organization:
+    id: ba1e3bca-26d2-4558-89c9-0475c6e31ae6
+  owner:
+    groups:
+    - name: ba1e3bca-26d2-4558-89c9-0475c6e31ae6/users
+    users: []
+  priority: 2
+---
+apiVersion: maas.opendatahub.io/v1alpha1
+kind: MaaSAuthPolicy
+metadata:
+  annotations:
+    openshift.io/display-name: coke-lama
+  labels:
+    ai-grid/subscription: coke-lama-ochkdc
+    app.kubernetes.io/managed-by: ai-grid-provider-backend
+  name: coke-lama-ochkdc-policy
+  namespace: models-as-a-service
+spec:
+  modelRefs:
+  - name: llama-32-1b-instruct
+    namespace: models-as-a-service
+  subjects:
+    groups:
+    - name: ba1e3bca-26d2-4558-89c9-0475c6e31ae6/users
+    users: []
