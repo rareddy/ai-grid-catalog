@@ -1,5 +1,4 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- ../../models/llama-32-1b-instruct/deployment
 - ../../models/smolm2/deployment
