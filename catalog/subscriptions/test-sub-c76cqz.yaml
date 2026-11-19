@@ -2,7 +2,7 @@ apiVersion: maas.opendatahub.io/v1alpha1
 kind: MaaSSubscription
 metadata:
   annotations:
-    ai-grid/version: "1"
+    ai-grid/version: "2"
     maas.opendatahub.io/retain-api-keys-on-delete: "true"
     openshift.io/display-name: test-sub
   name: test-sub-c76cqz
@@ -12,7 +12,7 @@ spec:
   - name: smolm2
     namespace: models-as-a-service
     tokenRateLimits:
-    - limit: 1000
+    - limit: 20
       window: 1m
   organization:
     id: c047e2b5-1a20-4f17-92ba-ed7a459f7b74
